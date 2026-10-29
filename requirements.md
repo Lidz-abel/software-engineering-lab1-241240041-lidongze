@@ -1,6 +1,6 @@
 # 校园二手交易系统需求整理
 
-仓库地址：[建立远程仓库后填写]
+仓库地址：https://github.com/Lidz-abel/software-engineering-lab1-241240041-lidongze
 
 版本：最终版　日期：2026-10-29
 
