@@ -1,0 +1,48 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Microsoft YaHei
+skinparam shadowing false
+skinparam linetype ortho
+title UML部署图——运行节点与数据存储
+
+node "用户设备" as Client {
+  artifact "手机/电脑浏览器" as Browser
+}
+
+cloud "校园网 / Internet" as Net
+
+node "应用服务器" as Server {
+  node "Nginx" as Nginx {
+    artifact "Vue静态资源" as Vue
+    artifact "HTTPS反向代理" as Proxy
+  }
+  node "JVM" as JVM {
+    artifact "Spring Boot 应用\n（模块化单体）" as App
+  }
+}
+
+database "MySQL服务器" as MySQL {
+  artifact "用户、商品、审核、\n预约、举报、日志数据" as Data
+}
+
+node "Redis服务器" as RedisNode {
+  artifact "会话、幂等键、\n短期查询缓存" as Cache
+}
+
+node "对象存储" as OSS {
+  artifact "商品图片" as Images
+}
+
+Browser --> Net : HTTPS
+Net --> Nginx : 443
+Nginx --> App : REST/JSON
+App --> MySQL : JDBC / 事务
+App --> RedisNode : Redis协议
+App --> OSS : S3兼容API
+
+note right of Server
+课程原型可将 Nginx、应用、MySQL 和 Redis
+部署在同一台开发机；逻辑节点保持分离，
+便于后续独立扩容和替换。
+end note
+@enduml

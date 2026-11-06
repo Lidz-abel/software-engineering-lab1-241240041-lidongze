@@ -1,0 +1,60 @@
+@startuml
+left to right direction
+skinparam defaultFontName Microsoft YaHei
+skinparam shadowing false
+skinparam packageStyle rectangle
+title UML用例图——参与者与主要功能
+
+actor 游客
+actor "普通用户" as User
+actor 买家
+actor 卖家
+actor 管理员
+User <|-- 买家
+User <|-- 卖家
+
+rectangle "校园二手交易系统" {
+  usecase "浏览与组合查询商品" as UC_Search
+  usecase "注册、登录与维护资料" as UC_Account
+  usecase "发布和管理商品" as UC_Product
+  usecase "提交商品审核" as UC_Submit
+  usecase "预约商品" as UC_Reserve
+  usecase "取消预约/申请取消" as UC_Cancel
+  usecase "确认或拒绝预约" as UC_Handle
+  usecase "确认交易完成" as UC_Complete
+  usecase "查看站内通知" as UC_Notify
+  usecase "举报商品/提交争议" as UC_Report
+  usecase "审核商品" as UC_Audit
+  usecase "处理举报与冻结交易" as UC_Moderate
+  usecase "维护分类和用户" as UC_Admin
+  usecase "查看统计与操作日志" as UC_Stats
+  usecase "检查身份与数据归属" as UC_Auth
+  usecase "保存价格快照并原子更新状态" as UC_Atomic
+}
+
+游客 --> UC_Search
+游客 --> UC_Account
+User --> UC_Search
+User --> UC_Notify
+User --> UC_Report
+卖家 --> UC_Product
+卖家 --> UC_Submit
+卖家 --> UC_Handle
+卖家 --> UC_Cancel
+买家 --> UC_Reserve
+买家 --> UC_Cancel
+买家 --> UC_Complete
+管理员 --> UC_Audit
+管理员 --> UC_Moderate
+管理员 --> UC_Admin
+管理员 --> UC_Stats
+
+UC_Product .> UC_Auth : <<include>>
+UC_Reserve .> UC_Auth : <<include>>
+UC_Reserve .> UC_Atomic : <<include>>
+UC_Cancel .> UC_Atomic : <<include>>
+UC_Handle .> UC_Atomic : <<include>>
+UC_Complete .> UC_Atomic : <<include>>
+UC_Audit .> UC_Auth : <<include>>
+UC_Moderate .> UC_Auth : <<include>>
+@enduml

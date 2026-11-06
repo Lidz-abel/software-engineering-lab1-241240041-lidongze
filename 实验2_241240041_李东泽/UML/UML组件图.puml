@@ -1,0 +1,75 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Microsoft YaHei
+skinparam shadowing false
+skinparam componentStyle rectangle
+skinparam linetype ortho
+title UML组件图——模块划分与依赖关系
+
+actor 游客
+actor 普通用户
+actor 管理员
+
+package "表现层" {
+  [Vue 3 响应式前端] as Web
+  [管理员后台] as AdminWeb
+}
+
+package "接口与应用层（Spring Boot 模块化单体）" {
+  [认证与权限模块] as Auth
+  [用户模块] as UserModule
+  [商品与分类模块] as ProductModule
+  [审核与治理模块] as Moderation
+  [查询与统计模块] as Query
+  [预约与交易模块] as Trade
+  [通知模块] as Notify
+  [日志模块] as Log
+  [超时调度模块] as Scheduler
+}
+
+package "基础设施层" {
+  database "MySQL\n业务数据与事务" as DB
+  database "Redis\n会话、幂等键、短期缓存" as Redis
+  folder "对象存储\n商品图片" as ObjectStorage
+}
+
+游客 --> Web
+普通用户 --> Web
+管理员 --> AdminWeb
+
+Web --> Auth : 登录/鉴权
+Web --> ProductModule : 商品管理
+Web --> Query : 查询/统计
+Web --> Trade : 预约/交易
+Web --> Notify : 通知
+AdminWeb --> Auth
+AdminWeb --> Moderation
+AdminWeb --> Query
+AdminWeb --> Log
+
+Auth --> UserModule
+Auth --> Redis
+ProductModule --> Moderation : 提交审核
+ProductModule --> ObjectStorage : 图片
+Moderation --> ProductModule : 审核/违规状态
+Trade --> ProductModule : 原子更新商品状态
+Trade --> Notify : 交易事件
+Moderation --> Notify : 审核/治理事件
+Scheduler --> Trade : 处理24小时超时
+
+UserModule --> DB
+ProductModule --> DB
+Moderation --> DB
+Query --> DB : 只读查询
+Trade --> DB : 事务写入
+Notify --> DB
+Log --> DB : 追加写入
+Trade --> Redis : 请求幂等
+Query --> Redis : 热点查询缓存
+
+note bottom of Trade
+采用模块化单体而非微服务：
+业务规模有限，部署简单；商品和预约可在
+同一数据库事务内更新，降低一致性风险。
+end note
+@enduml

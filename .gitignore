@@ -1,0 +1,14 @@
+# Local rendering tools and temporary browser profiles
+/tools/
+/.chrome-*/
+/.edge-*/
+
+# Experiment 2 report build artifacts and visual-check images
+/lab2-report.aux
+/lab2-report.log
+/lab2-report.out
+/lab2-report.toc
+/lab2-report.pdf
+/lab2-page-*.png
+/screen01.png
+/ui-test-*.png
