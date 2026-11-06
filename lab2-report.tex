@@ -48,13 +48,16 @@
 学号：&241240041\\
 需求来源：&实验一需求分析最终版\\
 设计日期：&2026年11月6日\\
-版本：&AI辅助设计初稿\\
+版本：&人工审查后最终版\\
 \end{tabular}
 \vfill
 {\color{muted}本报告中的 UML 图均使用 PlantUML 绘制，界面原型以本地 HTML/CSS 设计稿导出。}
 \end{titlepage}
 
+\begingroup
+\small
 \tableofcontents
+\endgroup
 \clearpage
 
 \section{项目选择与主要功能}
@@ -101,13 +104,14 @@ Redis 用于保存登录会话、短期幂等结果和热点查询缓存，但�
 
 没有直接设计为微服务，原因有三点：第一，课程项目的规模和团队人数有限，单体应用部署、调试和测试成本更低；第二，实验一反复强调商品与预约状态一致，模块化单体可以直接使用同一数据库事务；第三，模块边界仍然明确，后续业务量增大时可以根据调用关系拆分，而不需要现在提前承担分布式事务和服务治理的复杂度。
 
+\begin{landscape}
 \subsection{组件图：模块划分及交互}
-
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth,height=0.76\textheight,keepaspectratio]{UML组件图.png}
+\includegraphics[width=0.95\linewidth,height=0.76\textheight,keepaspectratio]{UML组件图.png}
 \caption{UML组件图——模块划分与依赖关系}
 \end{figure}
+\end{landscape}
 
 表现层只负责交互和展示，所有权限判断和状态变化在服务端完成。预约与交易模块调用商品模块完成条件状态更新，并在同一数据库事务中写入预约和日志；审核与治理模块根据处理结果更新商品或冻结交易；通知模块只消费已经确定的业务结果，避免业务失败却提前产生通知。超时调度模块调用交易模块的同一状态转换入口，不直接修改数据库。
 
@@ -123,9 +127,8 @@ Redis 用于保存登录会话、短期幂等结果和热点查询缓存，但�
 
 \section{UML设计与建模}
 
-\subsection{类图：核心领域模型}
-
 \begin{landscape}
+\subsection{类图：核心领域模型}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.96\linewidth,height=0.82\textheight,keepaspectratio]{UML类图.png}
@@ -161,15 +164,14 @@ Redis 用于保存登录会话、短期幂等结果和热点查询缓存，但�
 
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.81\textheight]{UML预约活动图.png}
+\includegraphics[height=0.72\textheight]{UML预约活动图.png}
 \caption{UML活动图——预约、取消与完成流程}
 \end{figure}
 
 活动图用泳道区分买家、系统、卖家和线下交付环节。系统在预约前先检查幂等键和商品当前状态；卖家 24 小时未处理时由系统超时；卖家确认后，买家若申请取消，商品保持已确认并暂停确认完成，直到卖家处理申请。该图同时说明线下交付不由系统执行，系统只记录交付后的确认结果。
 
-\subsection{时序图：并发预约与幂等}
-
 \begin{landscape}
+\subsection{时序图：并发预约与幂等}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.94\linewidth,height=0.82\textheight,keepaspectratio]{UML预约交易时序图.png}
@@ -193,11 +195,11 @@ Redis 用于保存登录会话、短期幂等结果和热点查询缓存，但�
 \centering
 \begin{minipage}[t]{0.49\textwidth}\centering
 \includegraphics[width=\linewidth]{01_首页与商品查询.png}
-\caption*{UI-01：首页与商品查询}
+\par\vspace{0.3em}{\small UI-01：首页与商品查询}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.49\textwidth}\centering
 \includegraphics[width=\linewidth]{02_登录与注册.png}
-\caption*{UI-02：登录与注册}
+\par\vspace{0.3em}{\small UI-02：登录与注册}
 \end{minipage}
 \caption{游客浏览与账户入口}
 \end{figure}
@@ -210,11 +212,11 @@ Redis 用于保存登录会话、短期幂等结果和热点查询缓存，但�
 \centering
 \begin{minipage}[t]{0.49\textwidth}\centering
 \includegraphics[width=\linewidth]{03_商品详情与预约.png}
-\caption*{UI-03：商品详情与预约}
+\par\vspace{0.3em}{\small UI-03：商品详情与预约}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.49\textwidth}\centering
 \includegraphics[width=\linewidth]{04_发布编辑商品.png}
-\caption*{UI-04：发布和编辑商品}
+\par\vspace{0.3em}{\small UI-04：发布和编辑商品}
 \end{minipage}
 \caption{商品查看与信息录入}
 \end{figure}
@@ -235,11 +237,11 @@ Redis 用于保存登录会话、短期幂等结果和热点查询缓存，但�
 \centering
 \begin{minipage}[t]{0.49\textwidth}\centering
 \includegraphics[width=\linewidth]{06_我的预约与交易.png}
-\caption*{UI-06：我的预约与交易}
+\par\vspace{0.3em}{\small UI-06：我的预约与交易}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.49\textwidth}\centering
 \includegraphics[width=\linewidth]{07_取消申请与交易详情.png}
-\caption*{UI-07：取消申请与交易详情}
+\par\vspace{0.3em}{\small UI-07：取消申请与交易详情}
 \end{minipage}
 \caption{预约状态和取消交互}
 \end{figure}
@@ -260,11 +262,11 @@ Redis 用于保存登录会话、短期幂等结果和热点查询缓存，但�
 \centering
 \begin{minipage}[t]{0.49\textwidth}\centering
 \includegraphics[width=\linewidth]{09_管理员仪表盘.png}
-\caption*{UI-09：管理员仪表盘}
+\par\vspace{0.3em}{\small UI-09：管理员仪表盘}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.49\textwidth}\centering
 \includegraphics[width=\linewidth]{10_商品审核.png}
-\caption*{UI-10：商品审核}
+\par\vspace{0.3em}{\small UI-10：商品审核}
 \end{minipage}
 \caption{平台概览与商品审核}
 \end{figure}
@@ -275,11 +277,11 @@ Redis 用于保存登录会话、短期幂等结果和热点查询缓存，但�
 \centering
 \begin{minipage}[t]{0.49\textwidth}\centering
 \includegraphics[width=\linewidth]{11_举报与用户治理.png}
-\caption*{UI-11：举报与用户治理}
+\par\vspace{0.3em}{\small UI-11：举报与用户治理}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.49\textwidth}\centering
 \includegraphics[width=\linewidth]{12_分类与操作日志.png}
-\caption*{UI-12：分类与操作日志}
+\par\vspace{0.3em}{\small UI-12：分类与操作日志}
 \end{minipage}
 \caption{平台治理、分类和日志}
 \end{figure}
@@ -322,10 +324,24 @@ AI 用于把图、界面和设计理由整理为报告结构，并生成图注�
 
 但现阶段不适合让人只做形式化校对。模块边界、是否采用微服务、取消申请中的操作权限、违规时如何处理已确认交易等决策包含业务责任和风险，模型不能替甲方或设计者作最终决定。更合理的分工是让 AI 承担候选方案生成、格式转换和一致性初查，人负责需求来源、取舍理由、冲突解决和最终验收。
 
+\subsection{人工审查与修改记录}
+
+\begin{longtable}{L{0.12\textwidth}L{0.24\textwidth}L{0.27\textwidth}L{0.27\textwidth}}
+\toprule
+编号 & 初稿问题 & 人工判断 & 最终修改\\
+\midrule
+MOD-001 & 组件图中多个模块直接连接 MySQL、Redis 和对象存储，交叉线较多，缩入报告后难以辨认。 & 业务模块不应直接依赖具体存储产品，应通过端口隔离；这也更符合后续替换基础设施的需要。 & 增加数据访问、幂等缓存和图片存储三个端口及适配器，模块只依赖端口，保留必要业务调用。\\
+MOD-002 & 类图和时序图标题位于横向页面环境之外，产生两页空白；双图页面使用了不适用的子图命令，显示“图 *”。 & 这些是自动排版未发现的质量问题，会影响提交报告的连续性和图号理解。 & 将小节标题移入横向页面，改用无编号文本作为 UI 子图标题，重新逐页检查 PDF。\\
+MOD-003 & 登录页左上角品牌文字沿用了深色全局样式，在蓝紫背景上对比不足。 & 品牌是账户入口的首个视觉锚点，应满足基本可读性，不能只保持组件复用而忽略背景差异。 & 为登录页品牌增加白色覆盖样式，并弱化图标阴影，重新导出 UI-02。\\
+\bottomrule
+\end{longtable}
+
+上述三项均由李东泽在查看 AI 初稿、UML 原图和 20 页报告预览后确认修改。Git 标签 \texttt{lab2-ai-draft} 保留修改前版本，\texttt{lab2-final} 对应人工审查后的最终文件。
+
 \section{阶段性结论}
 
 本设计形成了 7 种 UML 图和 12 个主要 UI 页面，覆盖结构性、行为性和交互性建模要求。架构以模块化单体保证课程原型的可实现性，以商品版本、价格快照、条件状态更新、事务和幂等键落实实验一的数据一致性要求。UI 不仅展示功能入口，也展示状态、限制和异常处理。
 
-当前版本作为 AI 辅助生成的设计初稿，下一步将以图的可读性、模块依赖和界面可用性为重点进行人工审查，并通过 Git 保留初稿和修改后的最终版本。
+最终版本已经完成图的可读性、模块依赖和界面可用性人工审查。Git 同时保留 AI 初稿和人工修改后的版本，使修改原因、源文件和最终图片均可追溯。
 
 \end{document}
