@@ -1,0 +1,52 @@
+$ C:\Users\Abel\AppData\Local\Programs\Python\Python313\python.exe -m unittest discover -s tests -v
+test_admin_view_does_not_expose_password_material (test_edges.EdgeTests.test_admin_view_does_not_expose_password_material) ... ok
+test_cannot_resume_dispute_with_disabled_party (test_edges.EdgeTests.test_cannot_resume_dispute_with_disabled_party) ... ok
+test_contact_update_is_private (test_edges.EdgeTests.test_contact_update_is_private) ... ok
+test_copy_violating_record_preserves_original (test_edges.EdgeTests.test_copy_violating_record_preserves_original) ... ok
+test_frozen_trade_does_not_expire_back_to_public (test_edges.EdgeTests.test_frozen_trade_does_not_expire_back_to_public) ... ok
+test_pending_request_reject_releases_product (test_edges.EdgeTests.test_pending_request_reject_releases_product) ... ok
+test_report_duplicate_and_final_state (test_edges.EdgeTests.test_report_duplicate_and_final_state) ... ok
+test_seller_cannot_complete_on_buyers_behalf (test_edges.EdgeTests.test_seller_cannot_complete_on_buyers_behalf) ... ok
+test_account_disable_freezes_active_trade (test_market.MarketTests.test_account_disable_freezes_active_trade) ... ok
+test_cancel_before_confirmation (test_market.MarketTests.test_cancel_before_confirmation) ... ok
+test_case_insensitive_username_unique (test_market.MarketTests.test_case_insensitive_username_unique) ... ok
+test_combined_filters_and_sql_injection (test_market.MarketTests.test_combined_filters_and_sql_injection) ... ok
+test_concurrent_last_item (test_market.MarketTests.test_concurrent_last_item) ... ok
+test_contact_only_after_confirmation (test_market.MarketTests.test_contact_only_after_confirmation) ... ok
+test_database_unique_active_reservation (test_market.MarketTests.test_database_unique_active_reservation) ... ok
+test_disabled_category_rejected (test_market.MarketTests.test_disabled_category_rejected) ... ok
+test_dispute_resume (test_market.MarketTests.test_dispute_resume) ... ok
+test_duplicate_request_returns_original (test_market.MarketTests.test_duplicate_request_returns_original) ... ok
+test_export_formula_escape (test_market.MarketTests.test_export_formula_escape) ... ok
+test_failed_operation_rolls_back_and_logs (test_market.MarketTests.test_failed_operation_rolls_back_and_logs) ... ok
+test_invalid_login_is_logged (test_market.MarketTests.test_invalid_login_is_logged) ... ok
+test_invalid_money (test_market.MarketTests.test_invalid_money) ... ok
+test_logout_revokes_token (test_market.MarketTests.test_logout_revokes_token) ... ok
+test_logs_private_and_append_only (test_market.MarketTests.test_logs_private_and_append_only) ... ok
+test_non_admin_cannot_audit (test_market.MarketTests.test_non_admin_cannot_audit) ... ok
+test_notification_ownership (test_market.MarketTests.test_notification_ownership) ... ok
+test_owner_authorization (test_market.MarketTests.test_owner_authorization) ... ok
+test_password_not_stored_plaintext (test_market.MarketTests.test_password_not_stored_plaintext) ... ok
+test_password_rotation_revokes_sessions (test_market.MarketTests.test_password_rotation_revokes_sessions) ... ok
+test_pending_cancel_blocks_completion (test_market.MarketTests.test_pending_cancel_blocks_completion) ... ok
+test_persistence_after_reopen (test_market.MarketTests.test_persistence_after_reopen) ... ok
+test_private_draft_hidden (test_market.MarketTests.test_private_draft_hidden) ... ok
+test_registration_does_not_create_admin (test_market.MarketTests.test_registration_does_not_create_admin) ... ok
+test_rejected_cancellation_can_complete (test_market.MarketTests.test_rejected_cancellation_can_complete) ... ok
+test_rejected_product_can_resubmit (test_market.MarketTests.test_rejected_product_can_resubmit) ... ok
+test_report_freezes_and_resolves (test_market.MarketTests.test_report_freezes_and_resolves) ... ok
+test_request_key_cannot_change_payload (test_market.MarketTests.test_request_key_cannot_change_payload) ... ok
+test_self_reservation_rejected (test_market.MarketTests.test_self_reservation_rejected) ... ok
+test_seller_cannot_confirm_after_deadline (test_market.MarketTests.test_seller_cannot_confirm_after_deadline) ... ok
+test_session_expiry (test_market.MarketTests.test_session_expiry) ... ok
+test_snapshot_and_statistics (test_market.MarketTests.test_snapshot_and_statistics) ... ok
+test_timeout_exact_boundary_and_repeat (test_market.MarketTests.test_timeout_exact_boundary_and_repeat) ... ok
+test_version_history_and_stale_edit (test_market.MarketTests.test_version_history_and_stale_edit) ... ok
+test_withdraw_then_stale_audit (test_market.MarketTests.test_withdraw_then_stale_audit) ... ok
+
+----------------------------------------------------------------------
+Ran 44 tests in 30.101s
+
+OK
+
+EXIT_CODE=0

@@ -12,3 +12,11 @@
 /lab2-page-*.png
 /screen01.png
 /ui-test-*.png
+
+# Experiment 3 report compilation intermediates
+/lab3-report.aux
+/lab3-report.log
+/lab3-report.out
+/lab3-report.toc
+/lab3-report.pdf
+/lab3-preview-*.png

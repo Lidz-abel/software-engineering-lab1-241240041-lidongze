@@ -13,9 +13,18 @@ def main():
     entries = []
     for path in sorted(root.rglob("*")):
         relative = path.relative_to(root)
-        if any(part in excluded or part.endswith(".egg-info") for part in relative.parts):
+        if any(
+            part in excluded or part.endswith(".egg-info") for part in relative.parts
+        ):
             continue
-        if path.is_file() and path.suffix not in {".pyc", ".db", ".aux", ".log", ".out", ".toc"}:
+        if path.is_file() and path.suffix not in {
+            ".pyc",
+            ".db",
+            ".aux",
+            ".log",
+            ".out",
+            ".toc",
+        }:
             entries.append(path)
     if not (root / "实验报告.pdf").is_file():
         raise SystemExit("Missing report PDF")
@@ -26,8 +35,13 @@ def main():
         if archive.testzip() is not None:
             raise SystemExit("ZIP integrity failure")
         names = archive.namelist()
-        for suffix in ("/实验报告.pdf", "/UML/UML类图.puml", "/UML/UML类图.png",
-                       "/code/pyproject.toml", "/code/src/market/gui.py"):
+        for suffix in (
+            "/实验报告.pdf",
+            "/UML/UML类图.puml",
+            "/UML/UML类图.png",
+            "/code/pyproject.toml",
+            "/code/src/market/gui.py",
+        ):
             if not any(name.endswith(suffix) for name in names):
                 raise SystemExit(f"Missing required file: {suffix}")
     print(f"ZIP: {destination}\nFiles: {len(entries)}")

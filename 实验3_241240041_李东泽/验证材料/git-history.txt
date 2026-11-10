@@ -1,0 +1,65 @@
+Snapshot before final report/evidence commit.
+
+$ git remote -v
+origin	https://github.com/Lidz-abel/software-engineering-lab1-241240041-lidongze.git (fetch)
+origin	https://github.com/Lidz-abel/software-engineering-lab1-241240041-lidongze.git (push)
+
+
+$ git log --graph --oneline --decorate -8
+* 79153f4 (HEAD -> main, origin/main) test(lab3): strengthen recovery checks and document reproducible desktop builds
+* 42a2758 (tag: lab3-implementation) feat(lab3): implement transactional desktop marketplace and acceptance tests
+* 4e77b53 (tag: lab2-final) docs: finalize lab2 design after manual review
+* 35f3dc5 (tag: lab2-ai-draft) docs: add lab2 AI design draft
+* 0c121a1 (tag: lab1-final) docs: add repository address
+* 0d7f8b0 docs: finalize lab1 requirements after review
+* 7d5af88 (tag: lab1-ai-draft) docs: add lab1 AI requirements draft
+
+
+$ git show --stat --oneline 42a2758
+42a2758 feat(lab3): implement transactional desktop marketplace and acceptance tests
+ .../code/.gitignore"                               |   9 +
+ .../code/pyproject.toml"                           |  25 +
+ .../code/requirements-dev.txt"                     |   4 +
+ .../code/src/market/__init__.py"                   |   3 +
+ .../code/src/market/__main__.py"                   |  72 +++
+ .../code/src/market/catalog.py"                    | 294 ++++++++++
+ .../code/src/market/core.py"                       | 251 ++++++++
+ .../code/src/market/database.py"                   | 132 +++++
+ .../code/src/market/governance.py"                 | 141 +++++
+ .../code/src/market/gui.py"                        | 650 +++++++++++++++++++++
+ .../code/src/market/models.py"                     | 130 +++++
+ .../code/src/market/queries.py"                    | 269 +++++++++
+ .../code/src/market/service.py"                    |  11 +
+ .../code/src/market/trading.py"                    | 298 ++++++++++
+ .../code/tests/test_market.py"                     | 325 +++++++++++
+ .../code/tools/gui_check.py"                       |  58 ++
+ .../code/tools/verify.py"                          | 102 ++++
+ 17 files changed, 2774 insertions(+)
+
+
+$ git show --stat --oneline 79153f4
+79153f4 test(lab3): strengthen recovery checks and document reproducible desktop builds
+ ...23\201\347\212\266\346\200\201\345\233\276.png" | Bin 0 -> 41300 bytes
+ ...3\201\347\212\266\346\200\201\345\233\276.puml" |  43 ++++
+ .../UML/UML\347\261\273\345\233\276.png"           | Bin 0 -> 269999 bytes
+ .../UML/UML\347\261\273\345\233\276.puml"          | 228 +++++++++++++++++++++
+ ...30\223\346\227\266\345\272\217\345\233\276.png" | Bin 0 -> 61241 bytes
+ ...0\223\346\227\266\345\272\217\345\233\276.puml" |  56 +++++
+ ...56\236\347\216\260\347\261\273\345\233\276.png" | Bin 0 -> 48084 bytes
+ ...6\236\347\216\260\347\261\273\345\233\276.puml" |  74 +++++++
+ ...16\260\351\203\250\347\275\262\345\233\276.png" | Bin 0 -> 27977 bytes
+ ...6\260\351\203\250\347\275\262\345\233\276.puml" |  23 +++
+ .../code/README.md"                                |  86 ++++++++
+ .../dist/shiguang_market-1.0.0-py3-none-any.whl"   | Bin 0 -> 29125 bytes
+ .../code/dist/shiguang_market-1.0.0.tar.gz"        | Bin 0 -> 30535 bytes
+ .../code/tests/test_edges.py"                      |  72 +++++++
+ .../code/tools/gui_check.py"                       |  19 +-
+ .../code/tools/release.py"                         |  38 ++++
+ ...277\207\347\250\213\350\256\260\345\275\225.md" |  22 ++
+ 17 files changed, 652 insertions(+), 9 deletions(-)
+
+
+$ git ls-remote origin refs/heads/main refs/tags/lab3-implementation
+79153f4ae5b98d45bba67ac8f93af0e3e28fe892	refs/heads/main
+42a27584168b21c7c3b10f85ce921b476ca42a2b	refs/tags/lab3-implementation
+

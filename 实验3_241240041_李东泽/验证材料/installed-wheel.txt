@@ -1,0 +1,3 @@
+INSTALLED_MODULE: D:\软件工\实验一_学号_姓名\实验3_241240041_李东泽\code\.venv\Lib\site-packages\market\__init__.py
+演示数据已创建：admin/Admin123!、seller/Seller123!、buyer/Buyer123!
+INSTALLED_WHEEL_OK: seed, login, query, reserve, confirm, complete, statistics

@@ -1,0 +1,121 @@
+$ C:\Users\Abel\AppData\Local\Programs\Python\Python313\python.exe -m build --no-isolation
+running egg_info
+writing src\shiguang_market.egg-info\PKG-INFO
+writing dependency_links to src\shiguang_market.egg-info\dependency_links.txt
+writing entry points to src\shiguang_market.egg-info\entry_points.txt
+writing top-level names to src\shiguang_market.egg-info\top_level.txt
+reading manifest file 'src\shiguang_market.egg-info\SOURCES.txt'
+writing manifest file 'src\shiguang_market.egg-info\SOURCES.txt'
+running sdist
+running egg_info
+writing src\shiguang_market.egg-info\PKG-INFO
+writing dependency_links to src\shiguang_market.egg-info\dependency_links.txt
+writing entry points to src\shiguang_market.egg-info\entry_points.txt
+writing top-level names to src\shiguang_market.egg-info\top_level.txt
+reading manifest file 'src\shiguang_market.egg-info\SOURCES.txt'
+writing manifest file 'src\shiguang_market.egg-info\SOURCES.txt'
+running check
+creating shiguang_market-1.0.0
+creating shiguang_market-1.0.0\src\market
+creating shiguang_market-1.0.0\src\shiguang_market.egg-info
+creating shiguang_market-1.0.0\tests
+copying files to shiguang_market-1.0.0...
+copying README.md -> shiguang_market-1.0.0
+copying pyproject.toml -> shiguang_market-1.0.0
+copying src\market\__init__.py -> shiguang_market-1.0.0\src\market
+copying src\market\__main__.py -> shiguang_market-1.0.0\src\market
+copying src\market\catalog.py -> shiguang_market-1.0.0\src\market
+copying src\market\core.py -> shiguang_market-1.0.0\src\market
+copying src\market\database.py -> shiguang_market-1.0.0\src\market
+copying src\market\governance.py -> shiguang_market-1.0.0\src\market
+copying src\market\gui.py -> shiguang_market-1.0.0\src\market
+copying src\market\models.py -> shiguang_market-1.0.0\src\market
+copying src\market\queries.py -> shiguang_market-1.0.0\src\market
+copying src\market\service.py -> shiguang_market-1.0.0\src\market
+copying src\market\trading.py -> shiguang_market-1.0.0\src\market
+copying src\shiguang_market.egg-info\PKG-INFO -> shiguang_market-1.0.0\src\shiguang_market.egg-info
+copying src\shiguang_market.egg-info\SOURCES.txt -> shiguang_market-1.0.0\src\shiguang_market.egg-info
+copying src\shiguang_market.egg-info\dependency_links.txt -> shiguang_market-1.0.0\src\shiguang_market.egg-info
+copying src\shiguang_market.egg-info\entry_points.txt -> shiguang_market-1.0.0\src\shiguang_market.egg-info
+copying src\shiguang_market.egg-info\top_level.txt -> shiguang_market-1.0.0\src\shiguang_market.egg-info
+copying tests\test_edges.py -> shiguang_market-1.0.0\tests
+copying tests\test_market.py -> shiguang_market-1.0.0\tests
+copying src\shiguang_market.egg-info\SOURCES.txt -> shiguang_market-1.0.0\src\shiguang_market.egg-info
+Writing shiguang_market-1.0.0\setup.cfg
+Creating tar archive
+removing 'shiguang_market-1.0.0' (and everything under it)
+running egg_info
+writing src\shiguang_market.egg-info\PKG-INFO
+writing dependency_links to src\shiguang_market.egg-info\dependency_links.txt
+writing entry points to src\shiguang_market.egg-info\entry_points.txt
+writing top-level names to src\shiguang_market.egg-info\top_level.txt
+reading manifest file 'src\shiguang_market.egg-info\SOURCES.txt'
+writing manifest file 'src\shiguang_market.egg-info\SOURCES.txt'
+running bdist_wheel
+running build
+running build_py
+creating build\lib\market
+copying src\market\catalog.py -> build\lib\market
+copying src\market\core.py -> build\lib\market
+copying src\market\database.py -> build\lib\market
+copying src\market\governance.py -> build\lib\market
+copying src\market\gui.py -> build\lib\market
+copying src\market\models.py -> build\lib\market
+copying src\market\queries.py -> build\lib\market
+copying src\market\service.py -> build\lib\market
+copying src\market\trading.py -> build\lib\market
+copying src\market\__init__.py -> build\lib\market
+copying src\market\__main__.py -> build\lib\market
+running egg_info
+writing src\shiguang_market.egg-info\PKG-INFO
+writing dependency_links to src\shiguang_market.egg-info\dependency_links.txt
+writing entry points to src\shiguang_market.egg-info\entry_points.txt
+writing top-level names to src\shiguang_market.egg-info\top_level.txt
+reading manifest file 'src\shiguang_market.egg-info\SOURCES.txt'
+writing manifest file 'src\shiguang_market.egg-info\SOURCES.txt'
+installing to build\bdist.win-amd64\wheel
+running install
+running install_lib
+creating build\bdist.win-amd64\wheel
+creating build\bdist.win-amd64\wheel\market
+copying build\lib\market\catalog.py -> build\bdist.win-amd64\wheel\.\market
+copying build\lib\market\core.py -> build\bdist.win-amd64\wheel\.\market
+copying build\lib\market\database.py -> build\bdist.win-amd64\wheel\.\market
+copying build\lib\market\governance.py -> build\bdist.win-amd64\wheel\.\market
+copying build\lib\market\gui.py -> build\bdist.win-amd64\wheel\.\market
+copying build\lib\market\models.py -> build\bdist.win-amd64\wheel\.\market
+copying build\lib\market\queries.py -> build\bdist.win-amd64\wheel\.\market
+copying build\lib\market\service.py -> build\bdist.win-amd64\wheel\.\market
+copying build\lib\market\trading.py -> build\bdist.win-amd64\wheel\.\market
+copying build\lib\market\__init__.py -> build\bdist.win-amd64\wheel\.\market
+copying build\lib\market\__main__.py -> build\bdist.win-amd64\wheel\.\market
+running install_egg_info
+Copying src\shiguang_market.egg-info to build\bdist.win-amd64\wheel\.\shiguang_market-1.0.0-py3.13.egg-info
+running install_scripts
+creating build\bdist.win-amd64\wheel\shiguang_market-1.0.0.dist-info\WHEEL
+creating 'D:\\软件工\\实验一_学号_姓名\\实验3_241240041_李东泽\\code\\dist\\.tmp-61hhwnny\\shiguang_market-1.0.0-py3-none-any.whl' and adding 'build\\bdist.win-amd64\\wheel' to it
+adding 'market/__init__.py'
+adding 'market/__main__.py'
+adding 'market/catalog.py'
+adding 'market/core.py'
+adding 'market/database.py'
+adding 'market/governance.py'
+adding 'market/gui.py'
+adding 'market/models.py'
+adding 'market/queries.py'
+adding 'market/service.py'
+adding 'market/trading.py'
+adding 'shiguang_market-1.0.0.dist-info/METADATA'
+adding 'shiguang_market-1.0.0.dist-info/WHEEL'
+adding 'shiguang_market-1.0.0.dist-info/entry_points.txt'
+adding 'shiguang_market-1.0.0.dist-info/top_level.txt'
+adding 'shiguang_market-1.0.0.dist-info/RECORD'
+removing build\bdist.win-amd64\wheel
+Successfully built shiguang_market-1.0.0.tar.gz and shiguang_market-1.0.0-py3-none-any.whl
+* Getting build dependencies for sdist...
+* Building sdist...
+* Building wheel from sdist
+* Getting build dependencies for wheel...
+* Building wheel...
+
+EXIT_CODE=0

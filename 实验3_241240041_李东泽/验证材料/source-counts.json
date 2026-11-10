@@ -1,0 +1,64 @@
+{
+  "python": "3.13.7",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "files": [
+    {
+      "file": "src\\market\\__init__.py",
+      "physical": 3,
+      "code_excluding_comments_docstrings": 1
+    },
+    {
+      "file": "src\\market\\__main__.py",
+      "physical": 72,
+      "code_excluding_comments_docstrings": 60
+    },
+    {
+      "file": "src\\market\\catalog.py",
+      "physical": 294,
+      "code_excluding_comments_docstrings": 264
+    },
+    {
+      "file": "src\\market\\core.py",
+      "physical": 251,
+      "code_excluding_comments_docstrings": 209
+    },
+    {
+      "file": "src\\market\\database.py",
+      "physical": 132,
+      "code_excluding_comments_docstrings": 121
+    },
+    {
+      "file": "src\\market\\governance.py",
+      "physical": 141,
+      "code_excluding_comments_docstrings": 128
+    },
+    {
+      "file": "src\\market\\gui.py",
+      "physical": 650,
+      "code_excluding_comments_docstrings": 560
+    },
+    {
+      "file": "src\\market\\models.py",
+      "physical": 130,
+      "code_excluding_comments_docstrings": 90
+    },
+    {
+      "file": "src\\market\\queries.py",
+      "physical": 269,
+      "code_excluding_comments_docstrings": 240
+    },
+    {
+      "file": "src\\market\\service.py",
+      "physical": 11,
+      "code_excluding_comments_docstrings": 6
+    },
+    {
+      "file": "src\\market\\trading.py",
+      "physical": 298,
+      "code_excluding_comments_docstrings": 272
+    }
+  ],
+  "production_code_lines": 1951,
+  "physical_lines": 2251,
+  "excluded": "tests, tools, generated files, blank lines, comments, docstrings"
+}

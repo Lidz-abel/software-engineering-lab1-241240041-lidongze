@@ -1,0 +1,7 @@
+$ C:\Users\Abel\AppData\Local\Programs\Python\Python313\python.exe -m pylint src/market
+
+--------------------------------------------------------------------
+Your code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)
+
+
+EXIT_CODE=0
