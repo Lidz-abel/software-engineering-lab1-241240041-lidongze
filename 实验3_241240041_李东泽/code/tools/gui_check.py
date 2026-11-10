@@ -18,20 +18,19 @@ def main():
         service = Marketplace(Path(directory) / "gui.db")
         seed_demo(service)
         window = MarketWindow(service)
+        callback_errors = []
+
+        def record_callback_error(error_type, error, traceback):
+            callback_errors.append(f"{error_type.__name__}: {error}")
+
+        window.root.report_callback_exception = record_callback_error
         window.root.update()
         window.root.geometry("1280x820+40+40")
 
         def capture(name):
             window.root.update()
-            left = window.root.winfo_rootx()
-            top = window.root.winfo_rooty()
-            box = (
-                left,
-                top,
-                left + window.root.winfo_width(),
-                top + window.root.winfo_height(),
-            )
-            ImageGrab.grab(bbox=box).save(evidence / name)
+            handle = int(window.root.wm_frame(), 16)
+            ImageGrab.grab(window=handle).save(evidence / name)
 
         window.root.after(700, lambda: capture("01-游客商品广场.png"))
 
@@ -51,6 +50,8 @@ def main():
         window.root.after(2100, seller_screen)
         window.root.after(2800, window.close)
         window.run()
+        if callback_errors:
+            raise AssertionError(callback_errors)
     print("GUI_SMOKE_OK: guest/admin/seller widgets rendered and captured")
 
 

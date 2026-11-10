@@ -1,0 +1,228 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Microsoft YaHei
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+title UML类图——校园二手交易系统核心领域模型
+
+package "用户与权限" {
+  class User {
+    +Long id
+    +String username
+    -String passwordHash
+    +String contact
+    +UserStatus status
+    +register()
+    +authenticate()
+    +updateContact()
+  }
+
+  class Role {
+    +Long id
+    +String code
+    +String name
+  }
+
+  enum UserStatus {
+    ACTIVE
+    LOCKED
+    DISABLED
+  }
+}
+
+package "商品与审核" {
+  class Product {
+    +Long id
+    +Long sellerId
+    +Long categoryId
+    +ProductStatus status
+    +int currentVersion
+    +submit()
+    +withdraw()
+    +publish()
+    +delist()
+    +changeStatus(expected, target)
+  }
+
+  class ProductVersion {
+    +Long id
+    +Long productId
+    +int versionNo
+    +String title
+    +String description
+    +Decimal price
+    +String condition
+    +String handoverPlace
+    +List imageUrls
+    +DateTime submittedAt
+  }
+
+  class Category {
+    +Long id
+    +String name
+    +boolean enabled
+    +enable()
+    +disable()
+  }
+
+  class AuditRecord {
+    +Long id
+    +Long productVersionId
+    +Long auditorId
+    +AuditResult result
+    +String reason
+    +DateTime auditedAt
+  }
+
+  enum ProductStatus {
+    DRAFT
+    PENDING_AUDIT
+    AUDIT_REJECTED
+    PUBLISHED
+    RESERVED
+    CONFIRMED
+    COMPLETED
+    DELISTED
+    VIOLATION_DELISTED
+    FROZEN
+  }
+
+  enum AuditResult {
+    APPROVED
+    REJECTED
+  }
+}
+
+package "预约与交易" {
+  class Reservation {
+    +Long id
+    +Long productId
+    +Long buyerId
+    +String requestId
+    +ReservationStatus status
+    +String titleSnapshot
+    +Decimal priceSnapshot
+    +DateTime createdAt
+    +DateTime expiresAt
+    +confirm()
+    +reject(reason)
+    +cancel(reason)
+    +expire()
+    +complete()
+    +freeze()
+  }
+
+  class CancelRequest {
+    +Long id
+    +Long reservationId
+    +Long applicantId
+    +CancelStatus status
+    +String reason
+    +String handlingNote
+    +DateTime createdAt
+    +handle(approved, note)
+  }
+
+  class Dispute {
+    +Long id
+    +Long reservationId
+    +Long applicantId
+    +DisputeStatus status
+    +String description
+    +String conclusion
+    +resolve()
+  }
+
+  enum ReservationStatus {
+    PENDING_SELLER
+    CONFIRMED
+    CANCEL_PENDING
+    CANCELLED
+    REJECTED
+    EXPIRED
+    COMPLETED
+    FROZEN
+  }
+
+  enum CancelStatus {
+    PENDING
+    APPROVED
+    REJECTED
+  }
+
+  enum DisputeStatus {
+    OPEN
+    RESOLVED
+  }
+}
+
+package "平台治理与支撑" {
+  class Report {
+    +Long id
+    +Long reporterId
+    +Long productId
+    +ReportStatus status
+    +String reason
+    +String description
+    +String handlingResult
+    +handle(result)
+  }
+
+  class Notification {
+    +Long id
+    +Long receiverId
+    +String eventKey
+    +String type
+    +String content
+    +boolean read
+    +DateTime createdAt
+    +markRead()
+  }
+
+  class OperationLog {
+    +Long id
+    +Long operatorId
+    +String objectType
+    +Long objectId
+    +String action
+    +String beforeState
+    +String afterState
+    +String result
+    +String reason
+    +DateTime occurredAt
+  }
+
+  enum ReportStatus {
+    PENDING
+    VALID
+    INVALID
+  }
+}
+
+User "*" -- "*" Role : 拥有 >
+User "1" -- "0..*" Product : 发布 >
+Category "1" -- "0..*" Product : 归类 >
+Product "1" *-- "1..*" ProductVersion : 保留版本 >
+ProductVersion "1" -- "0..*" AuditRecord : 接受审核 >
+User "1" -- "0..*" AuditRecord : 执行审核 >
+Product "1" -- "0..*" Reservation : 产生 >
+User "1" -- "0..*" Reservation : 作为买家 >
+Reservation "1" -- "0..*" CancelRequest : 申请取消 >
+Reservation "1" -- "0..*" Dispute : 产生争议 >
+User "1" -- "0..*" Report : 提交 >
+Product "1" -- "0..*" Report : 被举报 >
+User "1" -- "0..*" Notification : 接收 >
+User "0..1" -- "0..*" OperationLog : 执行 >
+
+note bottom of Reservation
+数据库约束：同一商品同一时刻
+最多存在一条有效预约；requestId 唯一。
+预约与商品状态在同一事务中更新。
+end note
+
+note right of ProductVersion
+预约创建时复制标题和价格，
+保证历史交易不受商品后续修改影响。
+end note
+@enduml

@@ -1,0 +1,56 @@
+@startuml
+skinparam defaultFontName Microsoft YaHei
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+title UML时序图——并发预约、幂等与状态一致性
+
+actor "买家A" as A
+actor "买家B" as B
+participant "Web前端" as Web
+participant "预约控制器" as Controller
+participant "幂等服务" as Idempotency
+participant "预约领域服务" as Trade
+database "MySQL" as DB
+participant "通知服务" as Notify
+
+par 买家A提交 requestId=A-001
+  A -> Web : 点击预约
+  Web -> Controller : POST /reservations\n(A-001, productId)
+  Controller -> Idempotency : 查询(A-001)
+  Idempotency --> Controller : 未处理
+  Controller -> Trade : reserve(buyerA, productId)
+  Trade -> DB : BEGIN
+  Trade -> DB : 条件更新商品\nPUBLISHED -> RESERVED
+  DB --> Trade : 更新1行
+  Trade -> DB : 插入预约与价格快照
+  Trade -> DB : 插入操作日志
+  Trade -> DB : COMMIT
+  Trade --> Controller : 预约成功
+else 买家B几乎同时提交 requestId=B-001
+  B -> Web : 点击预约
+  Web -> Controller : POST /reservations\n(B-001, productId)
+  Controller -> Idempotency : 查询(B-001)
+  Idempotency --> Controller : 未处理
+  Controller -> Trade : reserve(buyerB, productId)
+  Trade -> DB : BEGIN
+  Trade -> DB : 条件更新商品\nPUBLISHED -> RESERVED
+  DB --> Trade : 更新0行
+  Trade -> DB : ROLLBACK
+  Trade --> Controller : 状态冲突：已被预约
+end
+
+Controller -> Idempotency : 保存A-001处理结果
+Controller -> Notify : 发布预约成功事件
+Notify -> DB : 写入双方站内通知(eventKey唯一)
+Controller --> Web : 200 + 预约详情
+Web --> A : 显示预约成功
+Controller --> Web : 409 + 当前商品状态
+Web --> B : 显示已被预约
+
+== 网络重试 ==
+A -> Web : 再次点击/自动重试
+Web -> Controller : POST /reservations (A-001)
+Controller -> Idempotency : 查询(A-001)
+Idempotency --> Controller : 返回首次成功结果
+Controller --> Web : 原预约详情（不重复写库/通知）
+@enduml

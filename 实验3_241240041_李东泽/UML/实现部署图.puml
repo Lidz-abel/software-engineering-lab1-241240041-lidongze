@@ -1,0 +1,23 @@
+@startuml
+skinparam defaultFontName Microsoft YaHei
+title 实验三实际部署图——单机桌面应用
+node "Windows / Python 3.11+" {
+ artifact "Tkinter 桌面界面\nmarket.gui" as gui
+ artifact "领域服务\nmarket.service" as service
+ database "SQLite 文件\n外键 / WAL / 唯一索引" as db
+ folder "本地商品图片路径" as images
+ artifact "超时扫描\n桌面30秒调度 / CLI --sweep" as scheduler
+ gui --> service : 直接方法调用
+ service --> db : sqlite3 / 本地事务
+ service --> images : 路径校验
+ scheduler --> service : 同一交易转换入口
+}
+actor "普通用户（买家 / 卖家）" as user
+actor 管理员 as admin
+user --> gui
+admin --> gui
+note bottom of db
+不需要 MySQL、Redis、Nginx 或网络服务器。
+离线期间超时任务在重新启动或命令扫描时补处理。
+end note
+@enduml

@@ -1,0 +1,74 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName Microsoft YaHei
+skinparam classAttributeIconSize 0
+title 实验三实现类图（Python / Tkinter / SQLite）
+class MarketWindow {
+ +session: Session
+ +refresh()
+ +editor()
+ +run()
+}
+class Marketplace
+class Core {
+ +database: Database
+ +register()
+ +login(): Session
+ +actor()
+ +log()
+ +notify()
+}
+class CatalogMixin {
+ +create_product()
+ +edit_product()
+ +submit_product()
+ +audit_product()
+}
+class TradingMixin {
+ +reserve()
+ +cancel_reservation()
+ +handle_cancellation()
+ +complete_trade()
+ +expire_reservations()
+}
+class GovernanceMixin {
+ +report_product()
+ +handle_report()
+ +set_user_enabled()
+}
+class QueryMixin {
+ +products()
+ +reservations()
+ +logs()
+ +statistics()
+ +export_csv()
+}
+class Database {
+ +path: Path
+ +connect()
+ +transaction()
+}
+class Session <<immutable>> {
+ +token: str
+ +user_id: int
+ +username: str
+ +role: str
+}
+enum ProductStatus
+enum ReservationStatus
+MarketWindow --> Marketplace : 调用用例
+MarketWindow --> Session : 持有会话
+Marketplace --|> Core
+Marketplace --|> CatalogMixin
+Marketplace --|> TradingMixin
+Marketplace --|> GovernanceMixin
+Marketplace --|> QueryMixin
+Core *-- Database
+Core ..> Session : 登录时创建
+Database --> "SQLite" : 连接 / 外键 / 事务
+note bottom of Database
+Product、ProductVersion、Reservation、CancelRequest、
+Dispute、Report、AuditRecord、Notification、OperationLog
+映射为关系表和 sqlite3.Row，未逐表增加空壳实体类。
+end note
+@enduml
